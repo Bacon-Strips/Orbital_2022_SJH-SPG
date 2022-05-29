@@ -1,0 +1,32 @@
+body {
+    background-color: lightblue;
+  }
+  
+h1 {
+    color: navy;
+}
+
+.lineBreak {
+    border-top: 1px solid black;
+}
+
+.entries {
+    height: 108px;
+    width: 352px;
+}
+
+.successfulHunt {
+    background-color: LightGoldenRodYellow;
+}
+
+.huntWithLoot {
+    background-color: gold;
+}
+
+.unSuccessfulHunt {
+    background-color: whitesmoke;
+}
+
+.pillaged {
+    background-color: lightpink;
+}
