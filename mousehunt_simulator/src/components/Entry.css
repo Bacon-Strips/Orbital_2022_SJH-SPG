@@ -1,0 +1,18 @@
+.entry {
+    width: 352px;
+    font-size: 11px;
+    text-align: left;
+    color: black;
+}
+
+#successfulHunt {
+    background-color: LightGoldenRodYellow;
+}
+
+#unSuccessfulHunt {
+    background-color: whitesmoke;
+}
+
+#pillaged {
+    background-color: lightpink;
+}
