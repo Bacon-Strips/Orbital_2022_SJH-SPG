@@ -7,7 +7,7 @@ function Entry(props) {
             <p>Hunt #{`${props.huntno}`}</p>
             <p>{huntEntry(result, props.table)}</p>
         </div>
-    )
+    );
 }
 
 export default Entry;

@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import EntryTable from './components/EntryTable';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         >
           Learn React
         </a>
+        <EntryTable huntTill={30} cheese={'brie'} power={3000} luck={30} powerType={'shadow'}/>
       </header>
     </div>
   );
