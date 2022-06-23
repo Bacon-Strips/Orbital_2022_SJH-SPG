@@ -15,7 +15,6 @@ export function huntResult(table) {
 
     // Then determine the mouse attracted among the pool of mice
     let encounteredMouse = table.attractedMouse();
-    console.log(encounteredMouse);
     huntSummary.mouse = encounteredMouse;
 
     // Get trap effectiveness that is needed for the catch rate calculation
@@ -81,11 +80,8 @@ export class DataTable {
     // Returns attracted mouse for this hunt
     attractedMouse() {
         let val = Math.random();
-        console.log(this.mousePool);
         for (let mice of this.mousePool) {
             if (val <= mice.AR) {
-                console.log('yes');
-                console.log(mice.mouse);
                 return mice.mouse;
             }
             val -= mice.AR;
