@@ -8,7 +8,7 @@ function EntryTable(props) {
         entries.push(<Entry table={table} huntno = {i} key={i} />)
     }
     return (
-        <div>
+        <div className='EntryTable'>
             {entries}
         </div>
     );

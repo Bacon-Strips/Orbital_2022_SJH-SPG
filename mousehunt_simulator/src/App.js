@@ -8,17 +8,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit the simulator values and click on the simulate button to simulate hunts
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <EntryTable huntTill={30} cheese={'brie'} power={3000} luck={30} powerType={'shadow'}/>
+        <EntryTable huntTill={30} cheese={'brie'} power={3000} luck={30} powerType={'shadow'} location={'Meadow'}/>
       </header>
     </div>
   );
