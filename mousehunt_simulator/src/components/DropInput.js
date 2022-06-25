@@ -5,7 +5,7 @@ function DropInput(props) {
     return (
         <label className={props.Purpose}>
             {props.Purpose}
-            <select onChange={handleInputChange}>
+            <select onChange={handleInputChange} value={props.value}>
                 {props.options.map(x => {
                     return <option value={x}>{x}</option>
                 })}

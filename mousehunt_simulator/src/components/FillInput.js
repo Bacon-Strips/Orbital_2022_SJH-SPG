@@ -1,8 +1,18 @@
 function FillInput(props) {
+    function isValidNum(num) {
+            if (!isNaN(num)) {
+                return num;
+            }
+            return 0;
+        }
     return (
+        
         <label className={props.Purpose}> 
             {props.Purpose}
-            <input type="text" onChange={e => props.updateState(parseInt(e.target.value))} placeholder={0}/>
+            <input  type="number" 
+                    value={props.value} 
+                    onChange={e => props.updateState(Math.max(isValidNum(parseInt(e.target.value)), 0))} 
+                    />
         </label>
     );
 }

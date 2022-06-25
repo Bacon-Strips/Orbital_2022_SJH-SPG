@@ -8,25 +8,29 @@ export const locations =
 export const cheeses = 
 {' '        : ['Choose a location']
 
-, 'Meadow'  : ['Cheddar Cheese'
+, 'Meadow'  : [' '
+                , 'Cheddar Cheese'
                 , 'Marble Cheese'
                 , 'Swiss Cheese'
                 , 'Brie Cheese'
                 , 'SuperBrie+']
 
-, 'Town of Gnawnia' : ['Cheddar Cheese'
+, 'Town of Gnawnia' : [' '
+                        , 'Cheddar Cheese'
                         , 'Marble Cheese'
                         , 'Swiss Cheese'
                         , 'Brie Cheese'
                         , 'SuperBrie+']
 
-, 'Windmill'    : ['Cheddar Cheese'
+, 'Windmill'    : [' '
+                    , 'Cheddar Cheese'
                     , 'Marble Cheese'
                     , 'Swiss Cheese'
                     , 'Brie Cheese'
                     , 'SuperBrie+']
 
-, 'Calm Clearing'   : ['Cheddar Cheese'
+, 'Calm Clearing'   : [' '
+                        , 'Cheddar Cheese'
                         , 'Marble Cheese'
                         , 'Swiss Cheese'
                         , 'Brie Cheese'
