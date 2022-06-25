@@ -25,11 +25,16 @@ function ControlPanel(props) {
     function limitHunts(num) {
         ControlsetHunts(Math.min(500, num));
     }
+
+    function changeLocation(location) {
+        ControlsetLocation(location);
+        ControlsetCheese(' ');
+      }
     
     return (
         <div className='controls'>
             <div className='custom-values'>
-                <DropInput Purpose={'Locations'} value={Controllocation} options={locations} updateState={ControlsetLocation}/>
+                <DropInput Purpose={'Locations'} value={Controllocation} options={locations} updateState={changeLocation}/>
                 <DropInput Purpose={'Cheese'} value={Controlcheese} options={cheeses[Controllocation]} updateState={ControlsetCheese}/>
                 <DropInput Purpose={'Power Type'} value={ControlpowerType} options={powertypes} updateState={ControlsetPowerType}/>
                 <FillInput Purpose={'Power'} value={Controlpower}updateState={ControlsetPower}/>
