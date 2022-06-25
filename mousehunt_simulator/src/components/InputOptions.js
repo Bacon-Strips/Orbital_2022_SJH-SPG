@@ -6,7 +6,7 @@ export const locations =
 , 'Calm Clearing'];
 
 export const cheeses = 
-{' '        : ['Please a location']
+{' '        : ['Choose a location']
 
 , 'Meadow'  : ['Cheddar Cheese'
                 , 'Marble Cheese'

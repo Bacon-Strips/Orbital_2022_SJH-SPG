@@ -2,7 +2,7 @@ function FillInput(props) {
     return (
         <label className={props.Purpose}> 
             {props.Purpose}
-            <input type="text" onChange={e => props.updateState(parseInt(e.target.value))}/>
+            <input type="text" onChange={e => props.updateState(parseInt(e.target.value))} placeholder={0}/>
         </label>
     );
 }

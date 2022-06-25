@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import EntryTable from './components/EntryTable';
+import ControlPanel from './components/ControlPanel';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <p>
           Edit the simulator values and click on the simulate button to simulate hunts
         </p>
+        <ControlPanel></ControlPanel>
         <EntryTable huntTill={30} cheese={'brie'} power={3000} luck={30} powerType={'shadow'} location={'Meadow'}/>
       </header>
     </div>

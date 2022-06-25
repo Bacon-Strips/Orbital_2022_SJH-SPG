@@ -1,5 +1,4 @@
 import {huntResult, huntEntry, chooseBGColor} from './operations';
-import './Entry.css';
 
 function Entry(props) {
     let result = huntResult(props.table);
