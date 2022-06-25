@@ -3,7 +3,6 @@ import './App.css';
 import {useState} from 'react';
 import EntryTable from './components/EntryTable';
 import ControlPanel from './components/ControlPanel';
-import Button from './components/Button'
 
 function App() {
   const [power, setPower] = useState(0);
@@ -12,8 +11,11 @@ function App() {
   const [cheese, setCheese] = useState(' ');
   const [powerType, setPowerType] = useState(' ');
   const [numHunts, setHunts] = useState(0);
+  const [toggler, setToggler] = useState(0);
 
-
+  function toggle() {
+    setToggler(toggler === 0? toggler + 1 : toggler - 1);
+  }
   
 
   return (
@@ -30,9 +32,10 @@ function App() {
           setLocation={setLocation}
           setCheese={setCheese}
           setPowerType={setPowerType}
+          toggler={toggle}
         />
         
-        <EntryTable huntTill={numHunts} cheese={cheese} power={power} luck={luck} powerType={powerType} location={location}/>
+        <EntryTable huntTill={numHunts} cheese={cheese} power={power} luck={luck} powerType={powerType} location={location} toggler={toggler}/>
         <a className="lol" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Easter Egg!</a>
       </header>
     </div>

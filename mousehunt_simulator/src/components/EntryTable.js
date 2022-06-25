@@ -1,6 +1,5 @@
 import {DataTable} from './operations';
 import Entry from "./Entry";
-import {useState} from 'react';
 
 function EntryTable(props) {
     let table = new DataTable(props.cheese, props.power, props.luck, props.powerType, props.location);

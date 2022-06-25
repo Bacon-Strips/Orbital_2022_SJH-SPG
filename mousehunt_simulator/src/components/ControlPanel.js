@@ -12,14 +12,21 @@ function ControlPanel(props) {
     const [Controlcheese, ControlsetCheese] = useState(' ');
     const [Controllocation, ControlsetLocation] = useState(' ');
     const [ControlnumHunts, ControlsetHunts] = useState(0);
+    const [error, setError] = useState("");
 
     function simButton(event) {
-        props.setPower(Controlpower);
-        props.setLuck(Controlluck);
-        props.setPowerType(ControlpowerType);
-        props.setCheese(Controlcheese);
-        props.setLocation(Controllocation);
-        props.setHunts(ControlnumHunts);
+        if (Controllocation !== " " && Controlcheese !== " " && ControlpowerType !== " ") {
+            props.setPower(Controlpower);
+            props.setLuck(Controlluck);
+            props.setPowerType(ControlpowerType);
+            props.setCheese(Controlcheese);
+            props.setLocation(Controllocation);
+            props.setHunts(ControlnumHunts);
+            props.toggler();
+            setError("");
+        } else {
+
+        }
     }
 
     function limitHunts(num) {
