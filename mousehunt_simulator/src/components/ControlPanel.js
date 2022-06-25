@@ -3,6 +3,7 @@ import DropInput from './DropInput';
 import FillInput from './FillInput';
 import Button from './Button';
 import {locations, cheeses, powertypes} from './InputOptions'
+import ErrorDisplay from './ErrorDisplay';
 
 function ControlPanel(props) {
     
@@ -12,7 +13,7 @@ function ControlPanel(props) {
     const [Controlcheese, ControlsetCheese] = useState(' ');
     const [Controllocation, ControlsetLocation] = useState(' ');
     const [ControlnumHunts, ControlsetHunts] = useState(0);
-    const [error, setError] = useState("");
+    const [errors, setError] = useState([]);
 
     function simButton(event) {
         if (Controllocation !== " " && Controlcheese !== " " && ControlpowerType !== " ") {
@@ -23,9 +24,12 @@ function ControlPanel(props) {
             props.setLocation(Controllocation);
             props.setHunts(ControlnumHunts);
             props.toggler();
-            setError("");
+            setError([]);
         } else {
-
+            let errors = [[Controllocation === " ", "Please select a location"]
+                            , [Controllocation !== " " && Controlcheese === " ", "Please select a cheese"]
+                            , [ControlpowerType === " ", "Please select a Power Type"]];
+            setError(errors);
         }
     }
 
@@ -49,7 +53,8 @@ function ControlPanel(props) {
                 <FillInput Purpose={'No. of Hunts'} value={ControlnumHunts} updateState={limitHunts}/>
             </div>
             <div className='SimulatorButton'>
-                <Button Purpose={'Simulate'} do={simButton}></Button>
+                <Button Purpose={'Simulate'} do={simButton}/>
+                <ErrorDisplay conditions={errors}/>
             </div>
         </div>
     );
