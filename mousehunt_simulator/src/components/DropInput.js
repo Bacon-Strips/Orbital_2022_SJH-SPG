@@ -3,14 +3,11 @@ function DropInput(props) {
         props.updateState(event.target.value);
     }
     return (
-        <label className={props.Purpose}>
-            {props.Purpose}
-            <select onChange={handleInputChange} value={props.value}>
-                {props.options.map(x => {
-                    return <option value={x}>{x}</option>
-                })}
-            </select>
-        </label>
+        <select onChange={handleInputChange} value={props.value}>
+            {props.options.map((x, index) => {
+                return <option key={index} value={x}>{x}</option>
+            })}
+        </select>
     );
 }
 

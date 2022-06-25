@@ -41,21 +41,51 @@
   }
 }
 
+.Appbody {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+#controls {
+  text-align: left;
+  float: left;
+  width: 370px;
+}
+
+#controllabel {
+  width: 130px;
+}
+
+#sim_btn {
+  width: 200px;
+  float: left;
+}
+
+.Simulate {
+  width: 150px;
+  height: 70px;
+  font-size: large;
+}
+
 .EntryTable {
-  width: 369px;
+  width: 370px;
   height: 500px;
   overflow-y: scroll;
 }
 
 .entry {
   width: 352px;
-  font-size: 11px;
+  font-size: 15px;
   text-align: left;
   color: black;
 }
 
 #successfulHunt {
-  background-color: LightGoldenRodYellow;
+  background-color: #ffa;
 }
 
 #unSuccessfulHunt {

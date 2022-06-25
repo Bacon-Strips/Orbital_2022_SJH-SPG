@@ -6,14 +6,10 @@ function FillInput(props) {
             return 0;
         }
     return (
-        
-        <label className={props.Purpose}> 
-            {props.Purpose}
-            <input  type="number" 
-                    value={props.value} 
-                    onChange={e => props.updateState(Math.max(isValidNum(parseInt(e.target.value)), 0))} 
-                    />
-        </label>
+        <input  type="number" 
+                value={props.value} 
+                onChange={e => props.updateState(Math.max(isValidNum(parseInt(e.target.value)), 0))} 
+                />
     );
 }
 
