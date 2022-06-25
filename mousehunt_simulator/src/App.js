@@ -51,9 +51,12 @@ function App() {
           setCheese={setCheese}
           powerType={powerType}
           setPowerType={setPowerType}
-        ></ControlPanel>
-        <Button Purpose={Buttontext} do={toggle}></Button>
-        <EntryTable display={SimulateNow} huntTill={30} cheese={'brie'} power={3000} luck={30} powerType={'shadow'} location={'Meadow'}/>
+          Buttontext={Buttontext}
+          Buttonfunction={toggle}
+        />
+        
+        <EntryTable huntTill={numHunts} cheese={cheese} power={power} luck={luck} powerType={powerType} location={location}/>
+        <a className="lol" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Easter Egg!</a>
       </header>
     </div>
   );

@@ -1,26 +1,44 @@
 import {useState} from 'react';
 import DropInput from './DropInput';
 import FillInput from './FillInput';
+import Button from './Button';
 import {locations, cheeses, powertypes} from './InputOptions'
 
 function ControlPanel(props) {
-    /*
-    const [power, setPower] = useState(0);
-    const [luck, setLuck] = useState(0);
-    const [powertype, setPowertype] = useState(' ');
-    const [cheese, setCheese] = useState(' ');
-    const [location, setLocation] = useState(' ');
-    const [numHunts, setHunts] = useState(0);
-    **/
+    
+    const [Controlpower, ControlsetPower] = useState(0);
+    const [Controlluck, ControlsetLuck] = useState(0);
+    const [ControlpowerType, ControlsetPowerType] = useState(' ');
+    const [Controlcheese, ControlsetCheese] = useState(' ');
+    const [Controllocation, ControlsetLocation] = useState(' ');
+    const [ControlnumHunts, ControlsetHunts] = useState(0);
+
+    function simButton(event) {
+        props.setPower(Controlpower);
+        props.setLuck(Controlluck);
+        props.setPowerType(ControlpowerType);
+        props.setCheese(Controlcheese);
+        props.setLocation(Controllocation);
+        props.setHunts(ControlnumHunts);
+    }
+
+    function limitHunts(num) {
+        ControlsetHunts(Math.min(500, num));
+    }
     
     return (
         <div className='controls'>
-            <DropInput Purpose={'Locations'} value={props.location} options={locations} updateState={props.setLocation}/>
-            <DropInput Purpose={'Cheese'} value={props.cheese} options={cheeses[props.location]} updateState={props.setCheese}/>
-            <DropInput Purpose={'Power Type'} value={props.powerType} options={powertypes} updateState={props.setPowerType}/>
-            <FillInput Purpose={'Power'} value={props.power}updateState={props.setPower}/>
-            <FillInput Purpose={'Luck'} value={props.luck} updateState={props.setLuck}/>
-            <FillInput Purpose={'No. of Hunts'} value={props.numHunts} updateState={props.setHunts}/>
+            <div className='custom-values'>
+                <DropInput Purpose={'Locations'} value={Controllocation} options={locations} updateState={ControlsetLocation}/>
+                <DropInput Purpose={'Cheese'} value={Controlcheese} options={cheeses[Controllocation]} updateState={ControlsetCheese}/>
+                <DropInput Purpose={'Power Type'} value={ControlpowerType} options={powertypes} updateState={ControlsetPowerType}/>
+                <FillInput Purpose={'Power'} value={Controlpower}updateState={ControlsetPower}/>
+                <FillInput Purpose={'Luck'} value={Controlluck} updateState={ControlsetLuck}/>
+                <FillInput Purpose={'No. of Hunts'} value={ControlnumHunts} updateState={limitHunts}/>
+            </div>
+            <div className='SimulatorButton'>
+                <Button Purpose={'Simulate'} do={simButton}></Button>
+            </div>
         </div>
     );
 }
