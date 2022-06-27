@@ -1,4 +1,4 @@
-const mousePools = {
+export const mousePools = {
     'Meadow': {
         'Cheddar Cheese': [
             {mouse: 'White Mouse', AR: 0.1586},

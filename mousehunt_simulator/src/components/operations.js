@@ -1,3 +1,5 @@
+import {mousePools} from './forDemo';
+
 export function huntResult(table) {
     /**
      * For results.result, 
@@ -139,7 +141,7 @@ function fetchGold(mouse) {
 
 // to implement via database
 function fetchCheeseAR(cheese) {
-    return 0.5;
+    return 0.7;
 }
 
 // to be implemented with database
@@ -150,9 +152,5 @@ function fetchMousePower(mouse) {
 // to implement via database
 function generateMousePool(cheese, location) {
     // each element of the mousePool contains the mouse name and its attraction rate
-    return [{mouse: 'mouseName1', AR: 0.2}, 
-            {mouse: 'mouseName2', AR: 0.2},
-            {mouse: 'mouseName3', AR: 0.2}, 
-            {mouse: 'mouseName4', AR: 0.2}, 
-            {mouse: 'mouseName5', AR: 0.2}]
+    return mousePools[location][cheese];
 }
