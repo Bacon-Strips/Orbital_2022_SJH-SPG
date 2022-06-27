@@ -124,12 +124,12 @@ export function chooseBGColor(huntSummary) {
 
 // to be implemented with database
 function getTrapEff(mouse, trapType) {
-    return 2;
+    return 1;
 }
 
 // to be implemented with database
 function getminLuck(mouse) {
-    return 50;
+    return 500000;
 }
 
 // to implement via database
@@ -149,7 +149,7 @@ function fetchCheeseAR(cheese) {
 
 // to be implemented with database
 function fetchMousePower(mouse) {
-    return 10000;
+    return mouseStats[mouse].power;
 }
 
 // to implement via database

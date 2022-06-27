@@ -347,75 +347,93 @@ export const mousePools = {
 export const mouseStats = {
     'White Mouse' : {
         gold : 100,
-        points : 70
+        points : 70,
+        power : 1
     },
     'Brown Mouse' : {
         gold : 150,
-        points : 115
+        points : 115,
+        power : 3
     },
     'Grey Mouse' : {
         gold : 125,
-        points : 90
+        points : 90,
+        power : 2
     },
     'Spotted Mouse' : {
         gold : 175,
-        points : 175
+        points : 175,
+        power : 5
     },
     'Cowardly Mouse' : {
         gold : 300,
-        points : 190
+        points : 190,
+        power : 4
     },
     'Field Mouse' : {
         gold : 200,
-        points : 200
+        points : 200,
+        power : 5
     },
     'Lightning Rod Mouse' : {
         gold : 100,
-        points : 175
+        points : 175,
+        power : 4
     },
     'Granite Mouse' : {
         gold : 525,
-        points : 285
+        points : 285,
+        power : 635
     },
     'Bionic Mouse' : {
         gold : 550,
-        points : 550
+        points : 550,
+        power : 602
     },
     'Steel Mouse' : {
         gold : 500,
-        points : 270
+        points : 270,
+        power : 595
     },
     'Dwarf Mouse' : {
         gold : 450,
-        points : 225
+        points : 225,
+        power : 200
     },
     'Diamond Mouse' : {
         gold : 600,
-        points : 1200
+        points : 1200,
+        power : 765
     },
     'Gold Mouse' : {
         gold : 1200,
-        points : 600
+        points : 600,
+        power : 720
     },
     'Mole' : {
         gold : 500,
-        points : 550
+        points : 550,
+        power : 300
     },
     'Tiny Mouse' : {
         gold : 450,
-        points : 200
+        points : 200,
+        power : 7
     },
     'Flying Mouse' : {
         gold : 450,
-        points : 450
+        points : 450,
+        power : 50
     },
     'Pugilist Mouse' : {
         gold : 600,
-        points : 700
+        points : 700,
+        power : 700
     },
     'Longtail Mouse' : {
         gold : 900,
-        points : 1000
+        points : 1000,
+        power : 785
     },
     'Zombie Mouse' : {
         gold : 1900,
@@ -423,23 +441,28 @@ export const mouseStats = {
     },
     'Speedy Mouse' : {
         gold : 900,
-        points : 950
+        points : 950,
+        power : 920
     },
     'Master Burglar Mouse' : {
         gold : 2500,
-        points : 4260
+        points : 4260,
+        power : 4818
     },
     'Nibbler Mouse' : {
         gold : 899,
-        points : 1100
+        points : 1100,
+        power : 785
     },
     'Magic Mouse' : {
         gold : 1250,
-        points : 2000
+        points : 2000,
+        power : 300
     },
     'Silvertail Mouse' : {
         gold : 1200,
-        points : 1200
+        points : 1200,
+        power : 770
     },
 }
 
@@ -453,10 +476,14 @@ function check() {
                 if (!(mouse.mouse in mouseStats)) {
                     console.log(mouse.mouse + ' not in');
                 }
+                if (mouse.power <= 0) {
+                    console.log(mouse.mouse);
+                };
             }
             console.log(val);
         }
     }
 }
+
 
 //check();
