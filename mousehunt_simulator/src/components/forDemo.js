@@ -72,7 +72,7 @@ export const mousePools = {
             {mouse: 'Lightning Rod Mouse', AR: 0.0985},
             {mouse: 'Spotted Mouse', AR: 0.0790},
             {mouse: 'Field Mouse', AR: 0.0788},
-            {mouse: 'Mole Mouse', AR: 0.0513},
+            {mouse: 'Mole', AR: 0.0513},
             {mouse: 'Granite Mouse', AR: 0.0504},
             {mouse: 'Bionic Mouse', AR: 0.0500},
             {mouse: 'Steel Mouse', AR: 0.0494},
@@ -244,7 +244,7 @@ export const mousePools = {
             {mouse: 'Lightning Rod Mouse', AR: 0.0985},
             {mouse: 'Spotted Mouse', AR: 0.0790},
             {mouse: 'Field Mouse', AR: 0.0788},
-            {mouse: 'Mole Mouse', AR: 0.0513},
+            {mouse: 'Mole', AR: 0.0513},
             {mouse: 'Granite Mouse', AR: 0.0504},
             {mouse: 'Bionic Mouse', AR: 0.0500},
             {mouse: 'Steel Mouse', AR: 0.0494},
@@ -330,7 +330,7 @@ export const mousePools = {
             {mouse: 'Lightning Rod Mouse', AR: 0.0985},
             {mouse: 'Spotted Mouse', AR: 0.0790},
             {mouse: 'Field Mouse', AR: 0.0788},
-            {mouse: 'Mole Mouse', AR: 0.0513},
+            {mouse: 'Mole', AR: 0.0513},
             {mouse: 'Granite Mouse', AR: 0.0504},
             {mouse: 'Bionic Mouse', AR: 0.0500},
             {mouse: 'Steel Mouse', AR: 0.0494},
@@ -344,17 +344,119 @@ export const mousePools = {
     }
 };
 
-function checkMP() {
+export const mouseStats = {
+    'White Mouse' : {
+        gold : 100,
+        points : 70
+    },
+    'Brown Mouse' : {
+        gold : 150,
+        points : 115
+    },
+    'Grey Mouse' : {
+        gold : 125,
+        points : 90
+    },
+    'Spotted Mouse' : {
+        gold : 175,
+        points : 175
+    },
+    'Cowardly Mouse' : {
+        gold : 300,
+        points : 190
+    },
+    'Field Mouse' : {
+        gold : 200,
+        points : 200
+    },
+    'Lightning Rod Mouse' : {
+        gold : 100,
+        points : 175
+    },
+    'Granite Mouse' : {
+        gold : 525,
+        points : 285
+    },
+    'Bionic Mouse' : {
+        gold : 550,
+        points : 550
+    },
+    'Steel Mouse' : {
+        gold : 500,
+        points : 270
+    },
+    'Dwarf Mouse' : {
+        gold : 450,
+        points : 225
+    },
+    'Diamond Mouse' : {
+        gold : 600,
+        points : 1200
+    },
+    'Gold Mouse' : {
+        gold : 1200,
+        points : 600
+    },
+    'Mole' : {
+        gold : 500,
+        points : 550
+    },
+    'Tiny Mouse' : {
+        gold : 450,
+        points : 200
+    },
+    'Flying Mouse' : {
+        gold : 450,
+        points : 450
+    },
+    'Pugilist Mouse' : {
+        gold : 600,
+        points : 700
+    },
+    'Longtail Mouse' : {
+        gold : 900,
+        points : 1000
+    },
+    'Zombie Mouse' : {
+        gold : 1900,
+        points : 2000
+    },
+    'Speedy Mouse' : {
+        gold : 900,
+        points : 950
+    },
+    'Master Burglar Mouse' : {
+        gold : 2500,
+        points : 4260
+    },
+    'Nibbler Mouse' : {
+        gold : 899,
+        points : 1100
+    },
+    'Magic Mouse' : {
+        gold : 1250,
+        points : 2000
+    },
+    'Silvertail Mouse' : {
+        gold : 1200,
+        points : 1200
+    },
+}
+
+function check() {
     for (const [key, value] of Object.entries(mousePools)) {
         console.log(key);
         for (const [key, innerValue] of Object.entries(value)) {
             let val = 0;
             for (let mouse of innerValue) {
                 val += mouse.AR;
+                if (!(mouse.mouse in mouseStats)) {
+                    console.log(mouse.mouse + ' not in');
+                }
             }
             console.log(val);
         }
     }
 }
 
-checkMP();
+//check();

@@ -1,4 +1,4 @@
-import {mousePools} from './forDemo';
+import {mousePools, mouseStats} from './forDemo';
 
 export function huntResult(table) {
     /**
@@ -61,6 +61,9 @@ export class DataTable {
      * @param {String} location     The location where simulation takes place.
      */
     constructor(cheese, power, luck, trapType, location) {
+        if (location === ' ' || cheese === ' ' || trapType === ' ') {
+            return;
+        }
         this.mousePool = generateMousePool(cheese, location);
         this.mousePool.sort((a,b) => {
             return b.AR - a.AR;
@@ -131,12 +134,12 @@ function getminLuck(mouse) {
 
 // to implement via database
 function fetchPoints(mouse) {
-    return 0;
+    return mouseStats[mouse].points;
 }
 
 // to implement via database
 function fetchGold(mouse) {
-    return 0;
+    return mouseStats[mouse].gold;
 }
 
 // to implement via database
