@@ -1,4 +1,5 @@
 import {mousePools, mouseStats} from './forDemo';
+import {db} from '../firebase-config';
 
 export function huntResult(table) {
     /**
