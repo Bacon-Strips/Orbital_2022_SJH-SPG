@@ -13,7 +13,15 @@ function ControlPanel(props) {
     const [Controlcheese, ControlsetCheese] = useState(' ');
     const [Controllocation, ControlsetLocation] = useState(' ');
     const [ControlnumHunts, ControlsetHunts] = useState(0);
+    const [trap, setTrap] = useState([]);
+    const [base, setBase] = useState([]);
+    const [charm, setCharm] = useState([]);
+    const [pBonus, setPBonus] = useState(0);
+    const [bLuck, setBLuck] = useState(0);
+    const [goldenShield, setGoldenShield] = useState(false);
     const [errors, setError] = useState([]);
+
+    const [custom, setCustom] = useState(true);
 
     function simButton(event) {
         if (Controllocation !== " " && Controlcheese !== " " && ControlpowerType !== " ") {
@@ -40,7 +48,7 @@ function ControlPanel(props) {
     function changeLocation(location) {
         ControlsetLocation(location);
         ControlsetCheese(' ');
-      }
+    }
     
     return (
         <div className='controlpanel'>
@@ -62,6 +70,17 @@ function ControlPanel(props) {
                             <DropInput value={Controlcheese} options={cheeses[Controllocation]} updateState={ControlsetCheese}/>
                         </td>
                     </tr>
+                    <tr id="numHunts">
+                        <td id="controllabel">
+                            <p>{"No. of Hunts :"}</p>
+                        </td>
+                        <td>
+                            <FillInput Purpose={'No. of Hunts'} value={ControlnumHunts} updateState={limitHunts}/>                    
+                        </td>
+                    </tr>
+                </tbody>
+                { custom ?
+                <tbody>
                     <tr id="power_type">
                         <td id="controllabel">
                             <p>{"Power Type :"}</p>
@@ -86,15 +105,38 @@ function ControlPanel(props) {
                             <FillInput value={Controlluck} updateState={ControlsetLuck}/>                        
                         </td>
                     </tr>
-                    <tr id="numHunts">
+                </tbody> 
+                :
+                <tbody>
+                    <tr id="trap">
                         <td id="controllabel">
-                            <p>{"No. of Hunts :"}</p>
+                            <p>{"Trap :"}</p>
                         </td>
                         <td>
-                            <FillInput Purpose={'No. of Hunts'} value={ControlnumHunts} updateState={limitHunts}/>                    
+                            <DropInput value={ControlpowerType} options={powertypes} updateState={ControlsetPowerType}/>                    
                         </td>
                     </tr>
-                </tbody>
+                    <tr id="base">
+                        <td id="controllabel">
+                            <p>{"Base :"}</p>
+                        </td>
+                        <td>
+                            <FillInput value={Controlpower}updateState={ControlsetPower}/>                        
+                        </td>
+                    </tr>
+                    <tr id="charm">
+                        <td id="controllabel">
+                            <p>{"Charm :"}</p>
+                        </td>
+                        <td>
+                            <FillInput value={Controlluck} updateState={ControlsetLuck}/>                        
+                        </td>
+                    </tr>
+                    <tr id="bPower">
+                        <td id="controllabel"></td>
+                    </tr>
+                </tbody> 
+                }
             </table>
             <div id="sim_btn">
                 <Button Purpose={'Simulate'} do={simButton}/>

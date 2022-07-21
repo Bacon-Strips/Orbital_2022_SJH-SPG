@@ -13,8 +13,6 @@ function EntryTable(props) {
         return cheese.map((cheese) => cheese[[0]]);
     }
 
-    debug(100, test);
-
     let table = new DataTable(props.cheese, props.power, props.luck, props.powerType, props.location);
     
     let entries = [];
