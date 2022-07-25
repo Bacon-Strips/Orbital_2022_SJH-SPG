@@ -1,13 +1,34 @@
 import {useState} from 'react';
 import Form from 'react-bootstrap/Form';
-import { doc, getDocs, collection } from "firebase/firestore";
+import { doc, getDocs, collection, getDoc } from "firebase/firestore";
 
 import DropInput from './DropInput';
 import FillInput from './FillInput';
 import Button from './Button';
-import {locations, cheeses, powertypes} from './InputOptions'
+import {locations, cheeses, powertypes, trapOpt, baseOpt, charmOpt} from './InputOptions'
 import ErrorDisplay from './ErrorDisplay';
 import { db } from '../firebase-config';
+
+const trapData = {};
+const baseData = {};
+const charmData = {};
+
+const initialize = async () => {
+    let charms = await getDocs(collection(db, 'Charm'));
+    let traps = await getDocs(collection(db, 'Trap'));
+    let bases = await getDocs(collection(db, 'Base'));
+    charms.forEach((doc) => {
+        charmData[doc.id] = doc.data();
+    })
+    traps.forEach((doc) => {
+        trapData[doc.id] = doc.data();
+    })
+    bases.forEach((doc) => {
+        baseData[doc.id] = doc.data();
+    })
+}
+
+initialize();
 
 function ControlPanel(props) {
     
@@ -17,9 +38,9 @@ function ControlPanel(props) {
     const [Controlcheese, ControlsetCheese] = useState(' ');
     const [Controllocation, ControlsetLocation] = useState(' ');
     const [ControlnumHunts, ControlsetHunts] = useState(0);
-    const [trap, setTrap] = useState([]);
-    const [base, setBase] = useState([]);
-    const [charm, setCharm] = useState([]);
+    const [trap, setTrap] = useState(' ');
+    const [base, setBase] = useState(' ');
+    const [charm, setCharm] = useState(' ');
     const [pBonus, setPBonus] = useState(0);
     const [bLuck, setBLuck] = useState(0);
     const [goldenShield, setGoldenShield] = useState(false);
@@ -27,14 +48,9 @@ function ControlPanel(props) {
 
     const [custom, setCustom] = useState(true);
 
-    
-
-    const trapOptions = [];
-    const baseOptions = [];
-    const charmOptions = [];
-
     function simButton(event) {
-        if (Controllocation !== " " && Controlcheese !== " " && ControlpowerType !== " ") {
+        let validSetup = custom || (trap !== ' ' && base !== ' ');
+        if (Controllocation !== " " && Controlcheese !== " " && (ControlpowerType !== " " || !custom) && validSetup) {
             props.setPower(Controlpower);
             props.setLuck(Controlluck);
             props.setPowerType(ControlpowerType);
@@ -46,9 +62,15 @@ function ControlPanel(props) {
         } else {
             let errors = [[Controllocation === " ", "Please select a location"]
                             , [Controllocation !== " " && Controlcheese === " ", "Please select a cheese"]
-                            , [ControlpowerType === " ", "Please select a Power Type"]];
+                            , [ControlpowerType === " " && custom, "Please select a Power Type"]
+                            , [!custom && trap === ' ', "Please select a trap"]
+                            , [!custom && base === ' ', "Please select a base"]];
             setError(errors);
         }
+    }
+
+    const reset = () => {
+
     }
 
     function limitHunts(num) {
@@ -59,16 +81,6 @@ function ControlPanel(props) {
         ControlsetLocation(location);
         ControlsetCheese(' ');
     }
-
-    const test = async () => {
-        let coll = await getDocs(collection(db, 'Charm'));
-        coll.forEach((doc) => {
-            charmOptions.push(doc.data());
-        })
-        console.log(charmOptions);
-    }
-    
-    test();
 
     return (
         <div className='controlpanel'>
@@ -151,7 +163,7 @@ function ControlPanel(props) {
                             <p>{"Trap :"}</p>
                         </td>
                         <td>
-                            <DropInput value={trap} options={trapOptions} updateState={setTrap}/>                    
+                            <DropInput value={trap} options={trapOpt} updateState={setTrap}/>                    
                         </td>
                     </tr>
                     <tr id="base">
@@ -159,7 +171,7 @@ function ControlPanel(props) {
                             <p>{"Base :"}</p>
                         </td>
                         <td>
-                            <DropInput value={base} options={baseOptions} updateState={setBase}/>                        
+                            <DropInput value={base} options={baseOpt} updateState={setBase}/>                        
                         </td>
                     </tr>
                     <tr id="charm">
@@ -167,7 +179,7 @@ function ControlPanel(props) {
                             <p>{"Charm :"}</p>
                         </td>
                         <td>
-                            <DropInput value={charm} options={charmOptions} updateState={setCharm}/>                        
+                            <DropInput value={charm} options={charmOpt} updateState={setCharm}/>                        
                         </td>
                     </tr>
                     <tr id="bPower">
