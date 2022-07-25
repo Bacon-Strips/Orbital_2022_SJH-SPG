@@ -1,10 +1,13 @@
 import {useState} from 'react';
 import Form from 'react-bootstrap/Form';
+import { doc, getDocs, collection } from "firebase/firestore";
+
 import DropInput from './DropInput';
 import FillInput from './FillInput';
 import Button from './Button';
 import {locations, cheeses, powertypes} from './InputOptions'
 import ErrorDisplay from './ErrorDisplay';
+import { db } from '../firebase-config';
 
 function ControlPanel(props) {
     
@@ -23,6 +26,12 @@ function ControlPanel(props) {
     const [errors, setError] = useState([]);
 
     const [custom, setCustom] = useState(true);
+
+    
+
+    const trapOptions = [];
+    const baseOptions = [];
+    const charmOptions = [];
 
     function simButton(event) {
         if (Controllocation !== " " && Controlcheese !== " " && ControlpowerType !== " ") {
@@ -50,7 +59,17 @@ function ControlPanel(props) {
         ControlsetLocation(location);
         ControlsetCheese(' ');
     }
+
+    const test = async () => {
+        let coll = await getDocs(collection(db, 'Charm'));
+        coll.forEach((doc) => {
+            charmOptions.push(doc.data());
+        })
+        console.log(charmOptions);
+    }
     
+    test();
+
     return (
         <div className='controlpanel'>
             <table id='controls'>
@@ -77,6 +96,23 @@ function ControlPanel(props) {
                         </td>
                         <td>
                             <FillInput Purpose={'No. of Hunts'} value={ControlnumHunts} updateState={limitHunts}/>                    
+                        </td>
+                    </tr>
+                    <tr id="toggleCustom">
+                        <td id="controllabel">
+                            <p>{"Custom value :"}</p>
+                        </td>
+                        <td>
+                            <Form>
+                                <Form.Check 
+                                    type='checkbox'
+                                    id='toggle'
+                                    defaultChecked={custom}
+                                    onClick={(event) => {
+                                        setCustom(event.target.checked);
+                                    }}
+                                />    
+                            </Form>              
                         </td>
                     </tr>
                 </tbody>
@@ -109,12 +145,13 @@ function ControlPanel(props) {
                 </tbody> 
                 :
                 <tbody>
+                    <></>
                     <tr id="trap">
                         <td id="controllabel">
                             <p>{"Trap :"}</p>
                         </td>
                         <td>
-                            <DropInput value={ControlpowerType} options={powertypes} updateState={ControlsetPowerType}/>                    
+                            <DropInput value={trap} options={trapOptions} updateState={setTrap}/>                    
                         </td>
                     </tr>
                     <tr id="base">
@@ -122,7 +159,7 @@ function ControlPanel(props) {
                             <p>{"Base :"}</p>
                         </td>
                         <td>
-                            <FillInput value={Controlpower}updateState={ControlsetPower}/>                        
+                            <DropInput value={base} options={baseOptions} updateState={setBase}/>                        
                         </td>
                     </tr>
                     <tr id="charm">
@@ -130,11 +167,41 @@ function ControlPanel(props) {
                             <p>{"Charm :"}</p>
                         </td>
                         <td>
-                            <FillInput value={Controlluck} updateState={ControlsetLuck}/>                        
+                            <DropInput value={charm} options={charmOptions} updateState={setCharm}/>                        
                         </td>
                     </tr>
                     <tr id="bPower">
-                        <td id="controllabel"></td>
+                        <td id="controllabel">
+                            <p>{"Bonus Power % :"}</p>
+                        </td>
+                        <td>
+                            <FillInput value={pBonus} updateState={setPBonus}/> 
+                        </td>
+                    </tr>
+                    <tr id="extraLuck">
+                        <td id="controllabel">
+                            <p>{"Bonus Luck :"}</p>
+                        </td>
+                        <td>
+                            <FillInput value={bLuck} updateState={setBLuck}/> 
+                        </td>
+                    </tr>
+                    <tr id="goldenShield">
+                        <td id="controllabel">
+                            <p>{"Golden Shield :"}</p>
+                        </td>
+                        <td>
+                            <Form>
+                                <Form.Check 
+                                    type='checkbox'
+                                    id='toggleShield'
+                                    defaultChecked={goldenShield}
+                                    onClick={(event) => {
+                                        setGoldenShield(event.target.checked);
+                                    }}
+                                />    
+                            </Form> 
+                        </td>
                     </tr>
                 </tbody> 
                 }

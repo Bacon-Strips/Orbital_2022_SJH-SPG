@@ -5,13 +5,14 @@ import { db } from '../firebase-config';
 import Entry from "./Entry";
 
 function EntryTable(props) {
-
+    /*
     const test = async () => {
         const docRef = doc(db, 'Meadow', 'Mice Pool');
         const stuff = await getDoc(docRef);
         const cheese = Object.entries(stuff.data())
         return cheese.map((cheese) => cheese[[0]]);
     }
+    */
 
     let table = new DataTable(props.cheese, props.power, props.luck, props.powerType, props.location);
     
