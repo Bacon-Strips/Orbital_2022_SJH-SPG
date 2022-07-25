@@ -75,14 +75,14 @@ function ControlPanel(props) {
                 + baseData[base].Luck 
                 + charmData[charm].Luck 
                 + (goldenShield ? 7 : 0));
-            ControlsetPower((trapData[trap].Power 
+            ControlsetPower(Math.floor((trapData[trap].Power 
                     + baseData[base].Power
                     + charmData[charm].Power)
                 * (1 
                     + trapData[trap]['Power Bonus']
                     + baseData[base]['Power Bonus']
                     + charmData[charm]['Power Bonus']
-                    + pBonus / 100));
+                    + pBonus / 100)));
             ControlsetPowerType(trapData[trap].Type);
             }
     }
