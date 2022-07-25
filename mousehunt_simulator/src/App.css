@@ -58,6 +58,7 @@
 
 #controllabel {
   width: 130px;
+  font-size: 14px;
 }
 
 #sim_btn {
@@ -69,6 +70,11 @@
   width: 150px;
   height: 70px;
   font-size: large;
+}
+
+#error_message {
+  font-size: 14px;
+  color:lightcoral;
 }
 
 .EntryTable {
@@ -88,10 +94,10 @@
   background-color: #ffa;
 }
 
-#unSuccessfulHunt {
+#failToAttract {
   background-color: whitesmoke;
 }
 
-#pillaged {
+#eaten {
   background-color: lightpink;
 }
