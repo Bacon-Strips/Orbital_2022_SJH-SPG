@@ -1,3 +1,6 @@
+import {mousePools, mouseStats} from './forDemo';
+import {db} from '../firebase-config';
+
 export function huntResult(table) {
     /**
      * For results.result, 
@@ -59,6 +62,9 @@ export class DataTable {
      * @param {String} location     The location where simulation takes place.
      */
     constructor(cheese, power, luck, trapType, location) {
+        if (location === ' ' || cheese === ' ' || trapType === ' ') {
+            return;
+        }
         this.mousePool = generateMousePool(cheese, location);
         this.mousePool.sort((a,b) => {
             return b.AR - a.AR;
@@ -105,9 +111,9 @@ export class DataTable {
 export function chooseBGColor(huntSummary) {
     switch(huntSummary.result) {
         case -1:
-            return 'unSuccessfulHunt';
+            return 'failToAttract';
         case 0:
-            return 'unSuccessfulHunt';
+            return 'eaten';
         case 1:
             return 'successfulHunt';
         default:
@@ -119,40 +125,36 @@ export function chooseBGColor(huntSummary) {
 
 // to be implemented with database
 function getTrapEff(mouse, trapType) {
-    return 2;
+    return 1;
 }
 
 // to be implemented with database
 function getminLuck(mouse) {
-    return 50;
+    return 500000;
 }
 
 // to implement via database
 function fetchPoints(mouse) {
-    return 0;
+    return mouseStats[mouse].points;
 }
 
 // to implement via database
 function fetchGold(mouse) {
-    return 0;
+    return mouseStats[mouse].gold;
 }
 
 // to implement via database
 function fetchCheeseAR(cheese) {
-    return 0.5;
+    return 0.7;
 }
 
 // to be implemented with database
 function fetchMousePower(mouse) {
-    return 10000;
+    return mouseStats[mouse].power;
 }
 
 // to implement via database
 function generateMousePool(cheese, location) {
     // each element of the mousePool contains the mouse name and its attraction rate
-    return [{mouse: 'mouseName1', AR: 0.2}, 
-            {mouse: 'mouseName2', AR: 0.2},
-            {mouse: 'mouseName3', AR: 0.2}, 
-            {mouse: 'mouseName4', AR: 0.2}, 
-            {mouse: 'mouseName5', AR: 0.2}]
+    return mousePools[location][cheese];
 }
