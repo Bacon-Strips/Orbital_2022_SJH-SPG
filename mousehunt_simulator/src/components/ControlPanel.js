@@ -70,7 +70,15 @@ function ControlPanel(props) {
     }
 
     const reset = () => {
-
+        ControlsetLuck(0);
+        ControlsetPower(0);
+        ControlsetPowerType(' ');
+        setTrap(' ');
+        setBase(' ');
+        setCharm(' ');
+        setPBonus(0);
+        setBLuck(0);
+        setGoldenShield(false);
     }
 
     function limitHunts(num) {
@@ -122,6 +130,7 @@ function ControlPanel(props) {
                                     defaultChecked={custom}
                                     onClick={(event) => {
                                         setCustom(event.target.checked);
+                                        reset();
                                     }}
                                 />    
                             </Form>              
