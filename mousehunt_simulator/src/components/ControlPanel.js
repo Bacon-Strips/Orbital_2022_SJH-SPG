@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import { doc, getDocs, collection, getDoc } from "firebase/firestore";
 
@@ -9,9 +9,9 @@ import {locations, cheeses, powertypes, trapOpt, baseOpt, charmOpt} from './Inpu
 import ErrorDisplay from './ErrorDisplay';
 import { db } from '../firebase-config';
 
-const trapData = {};
-const baseData = {};
-const charmData = {};
+const trapData = {' ': {Luck: 0, Power: 0, 'Power Bonus': 0, Type: ' '}};
+const baseData = {' ': {Luck: 0, Power: 0, 'Power Bonus': 0}};
+const charmData = {' ': {Luck: 0, Power: 0, 'Power Bonus': 0}};
 
 const initialize = async () => {
     let charms = await getDocs(collection(db, 'Charm'));
@@ -68,6 +68,26 @@ function ControlPanel(props) {
             setError(errors);
         }
     }
+
+    const setupStats = () => {
+        if (!custom) {
+            ControlsetLuck(trapData[trap].Luck 
+                + baseData[base].Luck 
+                + charmData[charm].Luck 
+                + (goldenShield ? 7 : 0));
+            ControlsetPower((trapData[trap].Power 
+                    + baseData[base].Power
+                    + charmData[charm].Power)
+                * (1 
+                    + trapData[trap]['Power Bonus']
+                    + baseData[base]['Power Bonus']
+                    + charmData[charm]['Power Bonus']
+                    + pBonus / 100));
+            ControlsetPowerType(trapData[trap].Type);
+            }
+    }
+
+    useEffect(setupStats);
 
     const reset = () => {
         ControlsetLuck(0);
@@ -172,7 +192,10 @@ function ControlPanel(props) {
                             <p>{"Trap :"}</p>
                         </td>
                         <td>
-                            <DropInput value={trap} options={trapOpt} updateState={setTrap}/>                    
+                            <DropInput value={trap} options={trapOpt} updateState={(choice) => {
+                                setTrap(choice);
+                                setupStats();
+                                }}/>                    
                         </td>
                     </tr>
                     <tr id="base">
@@ -180,7 +203,10 @@ function ControlPanel(props) {
                             <p>{"Base :"}</p>
                         </td>
                         <td>
-                            <DropInput value={base} options={baseOpt} updateState={setBase}/>                        
+                            <DropInput value={base} options={baseOpt} updateState={(choice) => {
+                                setBase(choice)
+                                setupStats();
+                            }}/>                        
                         </td>
                     </tr>
                     <tr id="charm">
@@ -188,7 +214,10 @@ function ControlPanel(props) {
                             <p>{"Charm :"}</p>
                         </td>
                         <td>
-                            <DropInput value={charm} options={charmOpt} updateState={setCharm}/>                        
+                            <DropInput value={charm} options={charmOpt} updateState={(choice) => {
+                                setCharm(choice);
+                                setupStats();
+                            }}/>                        
                         </td>
                     </tr>
                     <tr id="bPower">
@@ -196,7 +225,10 @@ function ControlPanel(props) {
                             <p>{"Bonus Power % :"}</p>
                         </td>
                         <td>
-                            <FillInput value={pBonus} updateState={setPBonus}/> 
+                            <FillInput value={pBonus} updateState={(num) => {
+                                setPBonus(num);
+                                setupStats();
+                            }}/> 
                         </td>
                     </tr>
                     <tr id="extraLuck">
@@ -204,7 +236,10 @@ function ControlPanel(props) {
                             <p>{"Bonus Luck :"}</p>
                         </td>
                         <td>
-                            <FillInput value={bLuck} updateState={setBLuck}/> 
+                            <FillInput value={bLuck} updateState={(num) => {
+                                setBLuck(num);
+                                setupStats();
+                            }}/> 
                         </td>
                     </tr>
                     <tr id="goldenShield">
@@ -219,6 +254,7 @@ function ControlPanel(props) {
                                     defaultChecked={goldenShield}
                                     onClick={(event) => {
                                         setGoldenShield(event.target.checked);
+                                        setupStats();
                                     }}
                                 />    
                             </Form> 
@@ -230,6 +266,10 @@ function ControlPanel(props) {
             <div id="sim_btn">
                 <Button Purpose={'Simulate'} do={simButton}/>
                 <ErrorDisplay conditions={errors}/>
+            </div>
+            <div>
+                <p>Power: {Controlpower}</p>
+                <p>Luck: {Controlluck}</p>
             </div>
         </div>
     );
