@@ -111,9 +111,9 @@ export class DataTable {
 export function chooseBGColor(huntSummary) {
     switch(huntSummary.result) {
         case -1:
-            return 'unSuccessfulHunt';
+            return 'failToAttract';
         case 0:
-            return 'unSuccessfulHunt';
+            return 'eaten';
         case 1:
             return 'successfulHunt';
         default:
